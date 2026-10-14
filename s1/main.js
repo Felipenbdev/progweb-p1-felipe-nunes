@@ -1,36 +1,24 @@
-// s1/main.js — v2
+// s1/main.js — v3
 import { Conta } from './Conta.js';
+import { ContaCorrente } from './ContaCorrente.js';
+import { ContaPoupanca } from './ContaPoupanca.js';
 
-const conta = new Conta('0001', 'Ana Lima');
-conta.depositar(100);
-conta.sacar(30);
+const cc = new ContaCorrente('0001', 'Ana Lima');
+cc.depositar(200);
+cc.sacar(500);
+console.log('CC — saldo:', cc.saldo);
 
-console.log('Saldo:', conta.saldo);
-console.log('Titular:', conta.titular);
+const cp = new ContaPoupanca('0002', 'Bruno Souza');
+cp.depositar(1000);
+cp.render();
+console.log('Poupança — saldo:', cp.saldo);
 
 try {
-  conta.saldo = -5000;
+  cc.sacar(1000);
 } catch (e) {
   console.log('Bloqueado:', e.message);
 }
 
-try {
-  conta.depositar(-50);
-} catch (e) {
-  console.log('Bloqueado:', e.message);
-}
-
-try {
-  conta.sacar(9999);
-} catch (e) {
-  console.log('Bloqueado:', e.message);
-}
-
-try {
-  conta.titular = 'Al';
-} catch (e) {
-  console.log('Bloqueado:', e.message);
-}
-
-console.log('Saldo final:', conta.saldo);
-console.log('Titular final:', conta.titular);
+console.log(cc instanceof Conta);
+console.log(cp instanceof Conta);
+console.log(cc instanceof ContaCorrente);
