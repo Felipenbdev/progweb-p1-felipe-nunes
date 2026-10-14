@@ -11,4 +11,8 @@ export class ContaPoupanca extends Conta {
     const rendimento = this.saldo * this.taxaMensal;
     if (rendimento > 0) this.depositar(rendimento);
   }
+
+  tarifaMensal() {
+    return 0;
+  }
 }

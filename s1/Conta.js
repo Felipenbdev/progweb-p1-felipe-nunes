@@ -1,9 +1,12 @@
-// s1/Conta.js — v3: herança
+// s1/Conta.js — v4: polimorfismo
 export class Conta {
   #saldo = 0;
   #titular;
 
   constructor(numero, titular) {
+    if (new.target === Conta) {
+      throw new Error('Conta é abstrata e não pode ser instanciada.');
+    }
     this.numero = numero;
     this.#titular = titular;
   }
@@ -38,5 +41,13 @@ export class Conta {
       throw new Error('Saldo insuficiente.');
     }
     this.#saldo -= valor;
+  }
+
+  tarifaMensal() {
+    throw new Error('Conta é abstrata: crie ContaCorrente ou ContaPoupanca');
+  }
+
+  toString() {
+    return `${this.constructor.name} ${this.numero} — ${this.titular} — ${this.saldo.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
   }
 }

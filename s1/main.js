@@ -1,24 +1,29 @@
-// s1/main.js — v3
+// s1/main.js — v4
 import { Conta } from './Conta.js';
 import { ContaCorrente } from './ContaCorrente.js';
 import { ContaPoupanca } from './ContaPoupanca.js';
 
-const cc = new ContaCorrente('0001', 'Ana Lima');
-cc.depositar(200);
-cc.sacar(500);
-console.log('CC — saldo:', cc.saldo);
+const contas = [
+  new ContaCorrente('0001', 'Ana Lima'),
+  new ContaPoupanca('0002', 'Bruno Souza')
+];
 
-const cp = new ContaPoupanca('0002', 'Bruno Souza');
-cp.depositar(1000);
-cp.render();
-console.log('Poupança — saldo:', cp.saldo);
-
-try {
-  cc.sacar(1000);
-} catch (e) {
-  console.log('Bloqueado:', e.message);
+for (const conta of contas) {
+  conta.depositar(1000);
 }
 
-console.log(cc instanceof Conta);
-console.log(cp instanceof Conta);
-console.log(cc instanceof ContaCorrente);
+function fecharMes(contas) {
+  for (const conta of contas) {
+    const tarifa = conta.tarifaMensal();
+    if (tarifa > 0) conta.sacar(tarifa);
+    console.log(`${conta.toString()} (tarifa: R$ ${tarifa.toFixed(2)})`);
+  }
+}
+
+fecharMes(contas);
+
+try {
+  new Conta('0003', 'Carla Dias');
+} catch (e) {
+  console.log(`Erro esperado → ${e.message}`);
+}
