@@ -11,3 +11,9 @@ O domínio do projeto será definido na Semana 2.
 ## Estrutura
 
 - `s1/` — exercícios da Semana 1: os quatro pilares da POO em JavaScript.
+
+## Sobre
+
+Aplicação fullstack (API Express em camadas + SQLite + frontend Bootstrap com Vanilla JS).
+
+**Domínio:** Pet Shop. A modelagem está em [MODELAGEM.md](MODELAGEM.md).
